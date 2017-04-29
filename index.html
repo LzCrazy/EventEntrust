@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>EventEntrust</title>
+</head>
+<body>
+	<ul id="myLinks">
+		<li id="goSomewhere">去那里</li>
+		<li id="doSomewhere">在那里做事情</li>
+		<li id="dclick">itme3</li>
+	</ul>
+	<script>
+	window.onload=function(){
+		var item1=document.getElementById("goSomewhere");
+		var item2=document.getElementById("doSomewhere");
+		var item3=document.getElementById("dclick");
+
+		var EventUtil={
+			addHandler:function(ele,type,handler){
+				if(ele.addEventListener){
+					ele.addEventListener(type,handler,false);
+				}else if(ele.attachEvent){
+					ele.attachEvent("on"+type,handler);
+				}else{
+					ele["on"+type]=handler;
+				}
+			}
+		};
+		EventUtil.addHandler(item1,"click",function(event) {
+			location.href="http://www.baidu.com";
+		});
+		EventUtil.addHandler(item2,"click",function(event) {
+			document.title="变化的document标题"
+		});
+		EventUtil.addHandler(item3,"click",function(event) {
+			alert("这是item3的点击事件");
+		});
+	}
+	</script>
+</body>
+</html>
