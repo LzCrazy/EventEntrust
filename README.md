@@ -28,3 +28,38 @@
 	});
 	EventUtil.addHandler(item3,"click",function(event) {
 		alert("这是item3的点击事件");
+#通过委托事件，我们可以简写我们的代码，起到一定的优化效果
+	var EventUtil={
+		addHandler:function(ele,type,handler){
+			if(ele.addEventListener){
+				ele.addEventListener(type,handler,false);
+			}else if(ele.attachEvent){
+				ele.attachEvent("on"+type,handler);
+			}else{
+				ele["on"+type]=handler;
+			}
+		},
+		getEvent:function(event){
+			return event?event:window.event;
+		},
+		getTarget:function(event){
+			return event.target || event.srcElement;
+		}
+	};
+	 var list=document.getElementById("mylinks");
+	 EventUtil.addHandler(list,"click",function(event) {
+	 	event=EventUtil.getEvent(event);
+	 	var target=EventUtil.getTarget(event);
+
+	 	switch(target.id){
+	 		case "gobaidu":
+	 			location.href="http://www.baidu.com";
+	 			break;
+	 		case "title":
+	 			document.title="我的标题我做主";
+	 			break;
+	 		case "dclick":
+	 			alert("啥都没有😄");
+	 			break;
+	 	}
+	 });
