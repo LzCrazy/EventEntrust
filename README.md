@@ -3,8 +3,9 @@
 # 事件委托的原理
 	利用了事件冒泡，只指定一个事件处理程序，就可以管理某一类的所有事件
 
-#Demo(index.html)
-	这是我们通常写代码的做法，给每个点击事件添加相对应地函数
+## Demo(index.html)
+这是我们通常写代码的做法，给每个点击事件添加相对应地函数
+```
 	var item1=document.getElementById("goSomewhere");
 	var item2=document.getElementById("doSomewhere");
 	var item3=document.getElementById("dclick");
@@ -28,7 +29,10 @@
 	});
 	EventUtil.addHandler(item3,"click",function(event) {
 		alert("这是item3的点击事件");
-#通过委托事件，我们可以简写我们的代码，起到一定的优化效果
+```
+
+## 通过委托事件，我们可以简写我们的代码，起到一定的优化效果
+```
 	var EventUtil={
 		addHandler:function(ele,type,handler){
 			if(ele.addEventListener){
@@ -63,3 +67,4 @@
 	 			break;
 	 	}
 	 });
+```
